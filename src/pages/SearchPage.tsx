@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import SearchInput from '../components/SearchInput';
 import MessageList from '../components/MessageList';
+import ChatHistory from '../components/ChatHistory';
 import { SearchState, SearchResult } from '../types/search.types';
 import { Message } from '../types/message.types';
 import { Box, Typography, ThemeProvider, createTheme, Container, IconButton, Avatar } from '@mui/material';
 
-// Create dark theme
+
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -38,12 +39,8 @@ const darkTheme = createTheme({
   },
 });
 
-/**
- * SearchPage Component
- * Main page component that handles search functionality and displays results
- */
+
 const SearchPage: React.FC = () => {
-  // Initialize search state
   const [searchState, setSearchState] = useState<SearchState>({
     query: '',
     results: [],
@@ -51,12 +48,12 @@ const SearchPage: React.FC = () => {
     error: null,
   });
 
-  // State for messages
+  
   const [messages, setMessages] = useState<Message[]>([]);
 
   /**
    * Handles the search operation
-   * @param query - The search query string
+   * @param query 
    */
   const handleSearch = async (query: string) => {
     if (!query.trim()) {
@@ -65,7 +62,7 @@ const SearchPage: React.FC = () => {
 
     setSearchState(prev => ({ ...prev, isLoading: true, error: null }));
 
-    // Add user message to conversation
+    
     const userMessage: Message = {
       id: Date.now().toString(),
       content: query,
@@ -75,14 +72,13 @@ const SearchPage: React.FC = () => {
     setMessages(prev => [...prev, userMessage]);
 
     try {
-      // TODO: Replace with actual API call
-      // This is a mock implementation
+     
       const response = "How can I assist you today?";
 
-      // Simulate API delay
+     
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Add AI response to conversation
+      
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: response,
@@ -120,7 +116,7 @@ const SearchPage: React.FC = () => {
           overflow: 'hidden',
         }}
       >
-        {/* Profile icon in top right */}
+       
         <Box 
           sx={{ 
             position: 'absolute', 
@@ -152,7 +148,7 @@ const SearchPage: React.FC = () => {
           </IconButton>
         </Box>
 
-        {/* Main content area */}
+        
         <Box 
           sx={{ 
             flex: 1, 
@@ -162,10 +158,10 @@ const SearchPage: React.FC = () => {
             bgcolor: '#212121',
             width: '100%',
             overflowY: 'auto',
-            px: { xs: 0, sm: 2, md: 4 }, // Responsive padding based on screen size
+            px: { xs: 0, sm: 2, md: 4 }, 
           }}
         >
-          {/* Welcome text - shown only when no messages */}
+          
           {messages.length === 0 && !searchState.isLoading && (
             <Typography 
               variant="h4" 
@@ -182,7 +178,7 @@ const SearchPage: React.FC = () => {
             </Typography>
           )}
 
-          {/* Container for the message list */}
+          
           <Container 
             maxWidth="lg" 
             disableGutters 
@@ -190,14 +186,14 @@ const SearchPage: React.FC = () => {
               flex: 1, 
               display: 'flex',
               flexDirection: 'column',
-              px: { xs: 0, sm: 1, md: 2 }, // Responsive padding
+              px: { xs: 0, sm: 1, md: 2 },
             }}
           >
             <MessageList messages={messages} />
           </Container>
         </Box>
 
-        {/* Search input area */}
+        
         <SearchInput
           onSearch={handleSearch}
           placeholder="Ask anything"

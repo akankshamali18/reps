@@ -1,28 +1,11 @@
 import React from 'react';
-<<<<<<< HEAD
-import ChatHistory from './components/ChatHistory';
-
-const App = () => {
-  return (
-    <div>
-      <h1>Chat Interface</h1>
-      {/* Your main chat interface here */}
-      <ChatHistory />
-    </div>
-  );
-};
-
-export default App;
-=======
 import SearchPage from './pages/SearchPage';
+import ChatHistory from './components/ChatHistory';
 import { CssBaseline, Box } from '@mui/material';
 import './App.css';
 import './DarkMode.css';
 
-/**
- * Main App Component
- * Root component that renders the application with global styling
- */
+
 const App: React.FC = () => {
   return (
     <>
@@ -35,6 +18,7 @@ const App: React.FC = () => {
           overflow: 'hidden'
         }}
       >
+        <ChatHistory /> 
         <SearchPage />
       </Box>
     </>
@@ -42,4 +26,3 @@ const App: React.FC = () => {
 };
 
 export default App;
->>>>>>> akanksha

@@ -1,11 +1,9 @@
 import React from 'react';
+import ChatHistory from './ChatHistory';
 import { Box, Typography, Avatar } from '@mui/material';
 import { UserMessageProps } from '../types/message.types';
 
-/**
- * UserMessage Component
- * Displays user messages on the right side of the conversation
- */
+
 const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
   return (
     <Box 
@@ -46,7 +44,7 @@ const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
           U
         </Avatar>
 
-        {/* Message Content */}
+        
         <Box 
           sx={{ 
             flex: 1, 

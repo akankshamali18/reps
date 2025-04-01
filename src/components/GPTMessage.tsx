@@ -1,4 +1,5 @@
 import React from 'react';
+import ChatHistory from './ChatHistory';
 import { Box, Typography, Avatar } from '@mui/material';
 import { GPTMessageProps } from '../types/message.types';
 

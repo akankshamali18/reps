@@ -1,4 +1,5 @@
 import React from 'react';
+import ChatHistory from './ChatHistory';
 import { SearchResultsProps, SearchResult } from '../types/search.types';
 import { 
   Box, 
@@ -8,10 +9,6 @@ import {
   Paper
 } from '@mui/material';
 
-/**
- * SearchResults Component
- * Displays search results in a ChatGPT-like conversation interface
- */
 const SearchResults: React.FC<SearchResultsProps> = ({ results, isLoading, error, onResultClick }) => {
   if (isLoading) {
     return (
@@ -38,7 +35,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, isLoading, error
   }
 
   if (results.length === 0) {
-    // Empty state - no results to show
+   
     return null;
   }
 
@@ -46,7 +43,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, isLoading, error
     <Box sx={{ pb: 16, maxWidth: '48rem', mx: 'auto' }}>
       {results.map((result, index) => (
         <React.Fragment key={result.id}>
-          {/* User query - shown only for first result */}
+          
           {index === 0 && (
             <Box 
               sx={{ 
@@ -88,7 +85,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, isLoading, error
             </Box>
           )}
 
-          {/* AI response */}
+         
           <Box 
             sx={{ 
               py: 4,
