@@ -2,10 +2,7 @@ import React from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
 import { GPTMessageProps } from '../types/message.types';
 
-/**
- * GPTMessage Component
- * Displays GPT messages on the left side of the conversation
- */
+
 const GPTMessage: React.FC<GPTMessageProps> = ({ content, timestamp }) => {
   return (
     <Box 
