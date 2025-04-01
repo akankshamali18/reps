@@ -1,29 +1,68 @@
 import React, { useState } from 'react';
-import { Drawer, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Drawer, IconButton, List, ListItem, ListItemText, Typography, TextField } from '@mui/material';
+import { Chat as ChatIcon, Search as SearchIcon, Add as AddIcon } from '@mui/icons-material';
 
-// Define message structure
 interface Message {
-  sender: string;
-  text: string;
+  chatLabel: string;
 }
 
 const ChatHistory = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { sender: 'User', text: 'Hello GPT!' },
-    { sender: 'GPT', text: 'Hi! How can I help you?' }
-  ]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
-  // Toggle the drawer visibility
+  // Static messages grouped by timestamp
+  const messages: { [key: string]: Message[] } = {
+    Today: [
+      { chatLabel: 'How to implement timestamps in React?' },
+      { chatLabel: 'Best practices for clean code?' },
+      { chatLabel: 'Understanding closures in JavaScript' },
+      { chatLabel: 'React vs Vue comparison' },
+      { chatLabel: 'Optimizing performance in React apps' },
+    ],
+    Yesterday: [
+      { chatLabel: 'Handling state with Redux' },
+      { chatLabel: 'Async vs Await in JavaScript' },
+    ],
+    'Previous 7 days': [
+      { chatLabel: 'Understanding the event loop in Node.js' },
+      { chatLabel: 'Setting up MongoDB with Express' },
+    ],
+  };
+
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchIconClick = () => {
+    setIsSearchActive(!isSearchActive);
+    if (!isSearchActive) {
+      setSearchQuery('');  // Clear the search query when activating search
+    }
+  };
+
   return (
     <div>
-      <Button variant="contained" onClick={toggleDrawer}>
-        {isOpen ? 'Hide Chat History' : 'Show Chat History'}
-      </Button>
+      {/* Message Icon to Open Drawer */}
+      <IconButton
+        onClick={toggleDrawer}
+        sx={{
+          position: 'absolute',
+          top: 16,
+          left: 16,
+          zIndex: 1300,
+          backgroundColor: '#007bff',
+          color: 'white',
+          borderRadius: '50%',
+          padding: 1,
+        }}
+      >
+        <ChatIcon />
+      </IconButton>
 
       <Drawer
         anchor="left"
@@ -34,30 +73,113 @@ const ChatHistory = () => {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: 300,
-            backgroundColor: '#1f1f1f', // Dark background similar to ChatGPT
-            color: '#ffffff',            // White text color for readability
+            backgroundColor: '#1f1f1f',
+            color: '#ffffff',
             border: 'none',
-            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', // Same font family as ChatGPT
+            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             padding: 2,
           },
         }}
         variant="persistent"
       >
         <div>
-          <Typography variant="h6" sx={{ padding: '16px', color: 'white' }}>
-            Chat History
+          {/* Header: Message icon on the left, Search and Add icon on the right */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px' }}>
+            {/* Message Icon on the left */}
+            <IconButton sx={{ color: 'white' }} onClick={toggleDrawer}>
+              <ChatIcon />
+            </IconButton>
+
+            {/* Search Icon and Add Icon on the right */}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <IconButton sx={{ color: 'white', marginRight: 1 }} onClick={handleSearchIconClick}>
+                <SearchIcon />
+              </IconButton>
+              <IconButton sx={{ color: 'white' }}>
+                <AddIcon />
+              </IconButton>
+            </div>
+          </div>
+
+          {/* ChatGPT Label Below the Icon */}
+          <Typography variant="h6" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+            ChatGPT
+          </Typography>
+
+          {/* Search Bar, appears only when search icon is clicked */}
+          {isSearchActive && (
+            <TextField
+              variant="outlined"
+              fullWidth
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Search chats..."
+              sx={{
+                marginBottom: '16px',
+                backgroundColor: '#333333',
+                borderRadius: '4px',
+                '& .MuiInputBase-root': {
+                  color: 'white',
+                },
+              }}
+            />
+          )}
+
+          {/* Display Today's Messages */}
+          <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+            Today
           </Typography>
           <List>
-            {messages.map((message, index) => (
-              <ListItem key={index} sx={{ padding: '8px 16px' }}>
-                <ListItemText
-                  primary={`${message.sender}: ${message.text}`}
-                  primaryTypographyProps={{
-                    style: { fontFamily: 'Roboto', color: '#e0e0e0' }, // Match font and color
-                  }}
-                />
-              </ListItem>
-            ))}
+            {messages.Today.filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase())).map(
+              (message, index) => (
+                <ListItem key={index} sx={{ padding: '8px 16px' }}>
+                  <ListItemText
+                    primary={message.chatLabel}
+                    primaryTypographyProps={{
+                      style: { fontFamily: 'Roboto', color: '#e0e0e0' },
+                    }}
+                  />
+                </ListItem>
+              )
+            )}
+          </List>
+
+          {/* Display Yesterday's Messages */}
+          <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+            Yesterday
+          </Typography>
+          <List>
+            {messages.Yesterday.filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase())).map(
+              (message, index) => (
+                <ListItem key={index} sx={{ padding: '8px 16px' }}>
+                  <ListItemText
+                    primary={message.chatLabel}
+                    primaryTypographyProps={{
+                      style: { fontFamily: 'Roboto', color: '#e0e0e0' },
+                    }}
+                  />
+                </ListItem>
+              )
+            )}
+          </List>
+
+          {/* Display Previous 7 Days' Messages */}
+          <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+            Previous 7 days
+          </Typography>
+          <List>
+            {messages['Previous 7 days']
+              .filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase()))
+              .map((message, index) => (
+                <ListItem key={index} sx={{ padding: '8px 16px' }}>
+                  <ListItemText
+                    primary={message.chatLabel}
+                    primaryTypographyProps={{
+                      style: { fontFamily: 'Roboto', color: '#e0e0e0' },
+                    }}
+                  />
+                </ListItem>
+              ))}
           </List>
         </div>
       </Drawer>
