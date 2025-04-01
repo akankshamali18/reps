@@ -1,0 +1,43 @@
+/* Dark Mode Overrides */
+
+body, html, #root, .App {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background-color: #343541 !important;
+  color: #ffffff !important;
+}
+
+#root {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.MuiBox-root, .MuiContainer-root, .MuiPaper-root {
+  background-color: #343541 !important;
+}
+
+.MuiPaper-root.search-input {
+  background-color: #40414f !important;
+}
+
+/* Override any existing cards */
+.card {
+  background-color: #343541 !important;
+  padding: 0 !important;
+}
+
+.read-the-docs {
+  color: #ffffff !important;
+}
+
+/* Hide any default styling classes */
+.logo, .logo-spin {
+  display: none !important;
+} 
