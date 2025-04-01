@@ -36,8 +36,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
+    setInputValue(e.target.value);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -55,12 +54,13 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
         left: 0,
         right: 0,
         p: 2,
-        pb: 4,
-        bgcolor: '#343541',
-        borderTop: 1,
-        borderColor: 'divider',
+        pb: { xs: 2, sm: 4 },
+        bgcolor: '#212121',
+        borderTop: '1px solid',
+        borderColor: 'rgba(255,255,255,0.1)',
         zIndex: 1000,
       }}
+      className={className}
     >
       <Box sx={{ 
         display: 'flex', 
@@ -76,16 +76,27 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
             display: 'flex',
             alignItems: 'center',
             borderRadius: '12px',
-            bgcolor: '#40414f',
+            bgcolor: '#303030',
             boxShadow: '0 0 15px rgba(0,0,0,0.1)',
+            transition: 'box-shadow 0.2s ease',
             '&:hover': {
               boxShadow: '0 0 15px rgba(0,0,0,0.2)',
             },
           }}
           elevation={3}
+          onSubmit={(e) => e.preventDefault()}
         >
           {/* Add new chat button */}
-          <IconButton sx={{ mr: 1, color: 'text.secondary' }}>
+          <IconButton 
+            sx={{ 
+              mr: 1, 
+              color: 'rgba(255,255,255,0.6)',
+              '&:hover': { 
+                color: 'rgba(255,255,255,0.9)',
+                bgcolor: 'rgba(255,255,255,0.08)'
+              }
+            }}
+          >
             <AddIcon fontSize="small" />
           </IconButton>
 
@@ -94,8 +105,12 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
             sx={{ 
               ml: 1, 
               flex: 1,
-              color: 'text.primary',
+              color: 'white',
               fontSize: '1rem',
+              lineHeight: '1.5',
+              '& .MuiInputBase-input': {
+                padding: '8px 0',
+              }
             }}
             placeholder={placeholder}
             value={inputValue}
@@ -103,6 +118,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
             onKeyPress={handleKeyPress}
             multiline
             maxRows={4}
+            disabled={isTyping}
           />
 
           {/* Action buttons */}
@@ -113,9 +129,13 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
               sx={{ 
                 minWidth: 'auto', 
                 borderRadius: '8px',
-                color: 'text.secondary',
+                color: 'rgba(255,255,255,0.6)',
                 textTransform: 'none',
-                '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' },
+                transition: 'all 0.2s ease',
+                '&:hover': { 
+                  bgcolor: 'rgba(255,255,255,0.08)',
+                  color: 'rgba(255,255,255,0.9)'
+                },
                 p: '6px 10px',
               }}
               startIcon={<SearchIcon fontSize="small" />}
@@ -129,9 +149,13 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
               sx={{ 
                 minWidth: 'auto', 
                 borderRadius: '8px',
-                color: 'text.secondary',
+                color: 'rgba(255,255,255,0.6)',
                 textTransform: 'none',
-                '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' },
+                transition: 'all 0.2s ease',
+                '&:hover': { 
+                  bgcolor: 'rgba(255,255,255,0.08)',
+                  color: 'rgba(255,255,255,0.9)'
+                },
                 p: '6px 10px',
               }}
               startIcon={<TipsAndUpdatesIcon fontSize="small" />}
@@ -140,18 +164,31 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
             </Button>
 
             {/* More options button */}
-            <IconButton sx={{ color: 'text.secondary' }}>
+            <IconButton 
+              sx={{ 
+                color: 'rgba(255,255,255,0.6)',
+                '&:hover': { 
+                  color: 'rgba(255,255,255,0.9)',
+                  bgcolor: 'rgba(255,255,255,0.08)'
+                }
+              }}
+            >
               <MoreHorizIcon fontSize="small" />
             </IconButton>
+
+            <Divider orientation="vertical" flexItem sx={{ mx: 0.5, bgcolor: 'rgba(255,255,255,0.2)' }} />
 
             {/* Voice input button - only shown when input is empty */}
             {!inputValue && (
               <IconButton 
                 sx={{ 
-                  ml: 1, 
                   bgcolor: '#5a5a72', 
-                  color: 'white', 
-                  '&:hover': { bgcolor: '#6e6e8c' } 
+                  color: 'white',
+                  transition: 'all 0.2s ease',
+                  '&:hover': { 
+                    bgcolor: '#6e6e8c',
+                    transform: 'scale(1.05)'
+                  } 
                 }}
                 onClick={() => console.log('Voice input')}
               >
@@ -163,12 +200,16 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
             {inputValue && (
               <IconButton 
                 sx={{ 
-                  ml: 1, 
                   bgcolor: '#5a5a72', 
-                  color: 'white', 
-                  '&:hover': { bgcolor: '#6e6e8c' } 
+                  color: 'white',
+                  transition: 'all 0.2s ease',
+                  '&:hover': { 
+                    bgcolor: '#6e6e8c',
+                    transform: 'scale(1.05)'
+                  } 
                 }}
                 onClick={() => handleSearch(inputValue)}
+                disabled={isTyping}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -179,7 +220,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
         </Paper>
 
         {/* Footer info text */}
-        <Box sx={{ textAlign: 'center', mt: 1, fontSize: '0.75rem', color: 'text.secondary' }}>
+        <Box sx={{ textAlign: 'center', mt: 1, fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>
           ChatGPT can make mistakes. Check important info.
         </Box>
       </Box>

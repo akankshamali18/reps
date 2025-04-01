@@ -10,8 +10,8 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      default: '#343541',
-      paper: '#343541',
+      default: '#212121',
+      paper: '#212121',
     },
     text: {
       primary: '#FFFFFF',
@@ -23,7 +23,7 @@ const darkTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: '#343541',
+          backgroundColor: '#212121',
           color: '#FFFFFF',
         },
       },
@@ -31,7 +31,7 @@ const darkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: '#343541',
+          backgroundColor: '#212121',
         },
       },
     },
@@ -113,7 +113,7 @@ const SearchPage: React.FC = () => {
           flexDirection: 'column', 
           minHeight: '100vh',
           height: '100%',
-          bgcolor: '#343541',
+          bgcolor: '#212121',
           color: 'text.primary',
           width: '100%',
           position: 'relative',
@@ -131,9 +131,9 @@ const SearchPage: React.FC = () => {
         >
           <IconButton 
             sx={{ 
-              bgcolor: 'rgba(52, 53, 65, 0.7)',
+              bgcolor: 'rgba(33, 33, 33, 0.7)',
               '&:hover': {
-                bgcolor: 'rgba(52, 53, 65, 0.9)',
+                bgcolor: 'rgba(33, 33, 33, 0.9)',
               },
               p: 0.5
             }}
@@ -159,7 +159,7 @@ const SearchPage: React.FC = () => {
             display: 'flex', 
             flexDirection: 'column', 
             pt: messages.length ? 2 : 15,
-            bgcolor: '#343541',
+            bgcolor: '#212121',
             width: '100%',
             overflowY: 'auto',
             px: { xs: 0, sm: 2, md: 4 }, // Responsive padding based on screen size
