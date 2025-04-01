@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div>
       <h1>Chat Interface</h1>
-      {/* Your main chat interface here */}
+     
       <ChatHistory />
     </div>
   );

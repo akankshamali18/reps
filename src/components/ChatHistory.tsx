@@ -11,7 +11,6 @@ const ChatHistory = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchActive, setIsSearchActive] = useState(false);
 
-  // Static messages grouped by timestamp
   const messages: { [key: string]: Message[] } = {
     Today: [
       { chatLabel: 'How to implement timestamps in React?' },
@@ -41,13 +40,13 @@ const ChatHistory = () => {
   const handleSearchIconClick = () => {
     setIsSearchActive(!isSearchActive);
     if (!isSearchActive) {
-      setSearchQuery('');  // Clear the search query when activating search
+      setSearchQuery('');  
     }
   };
 
   return (
     <div>
-      {/* Message Icon to Open Drawer */}
+      {}
       <IconButton
         onClick={toggleDrawer}
         sx={{
@@ -83,14 +82,14 @@ const ChatHistory = () => {
         variant="persistent"
       >
         <div>
-          {/* Header: Message icon on the left, Search and Add icon on the right */}
+          {}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px' }}>
-            {/* Message Icon on the left */}
+            {}
             <IconButton sx={{ color: 'white' }} onClick={toggleDrawer}>
               <ChatIcon />
             </IconButton>
 
-            {/* Search Icon and Add Icon on the right */}
+            {}
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <IconButton sx={{ color: 'white', marginRight: 1 }} onClick={handleSearchIconClick}>
                 <SearchIcon />
@@ -101,12 +100,12 @@ const ChatHistory = () => {
             </div>
           </div>
 
-          {/* ChatGPT Label Below the Icon */}
+          {}
           <Typography variant="h6" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
             ChatGPT
           </Typography>
 
-          {/* Search Bar, appears only when search icon is clicked */}
+          {}
           {isSearchActive && (
             <TextField
               variant="outlined"
@@ -125,7 +124,7 @@ const ChatHistory = () => {
             />
           )}
 
-          {/* Display Today's Messages */}
+          {}
           <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
             Today
           </Typography>
@@ -144,7 +143,7 @@ const ChatHistory = () => {
             )}
           </List>
 
-          {/* Display Yesterday's Messages */}
+          {}
           <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
             Yesterday
           </Typography>
@@ -163,7 +162,7 @@ const ChatHistory = () => {
             )}
           </List>
 
-          {/* Display Previous 7 Days' Messages */}
+          {}
           <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
             Previous 7 days
           </Typography>
