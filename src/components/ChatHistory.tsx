@@ -40,21 +40,21 @@ const ChatHistory = () => {
   const handleSearchIconClick = () => {
     setIsSearchActive(!isSearchActive);
     if (!isSearchActive) {
-      setSearchQuery('');  
+      setSearchQuery('');
     }
   };
 
   return (
     <div>
-     
+
       <IconButton
         onClick={toggleDrawer}
         sx={{
           position: 'absolute',
-          top: 16,
+          top: 32,
           left: 16,
           zIndex: 1300,
-          backgroundColor: '#007bff',
+          // backgroundColor: 'black',
           color: 'white',
           borderRadius: '50%',
           padding: 1,
@@ -82,106 +82,101 @@ const ChatHistory = () => {
         variant="persistent"
       >
         <div>
-          
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px' }}>
-          
-            <IconButton sx={{ color: 'white' }} onClick={toggleDrawer}>
-              <ChatIcon />
-            </IconButton>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', padding: '16px' }}>
 
-            
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <IconButton sx={{ color: 'white', marginRight: 1 }} onClick={handleSearchIconClick}>
-                <SearchIcon />
-              </IconButton>
-              <IconButton sx={{ color: 'white' }}>
-                <AddIcon />
-              </IconButton>
-            </div>
+            <IconButton sx={{ color: 'white', marginRight: 1 }} onClick={handleSearchIconClick}>
+              <SearchIcon />
+            </IconButton>
+            <IconButton sx={{ color: 'white' }}>
+              <AddIcon />
+            </IconButton>
           </div>
 
-          <Typography variant="h6" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
-            ChatGPT
-          </Typography>
 
-       
-          {isSearchActive && (
-            <TextField
-              variant="outlined"
-              fullWidth
-              value={searchQuery}
-              onChange={handleSearchChange}
-              placeholder="Search chats..."
-              sx={{
-                marginBottom: '16px',
-                backgroundColor: '#333333',
-                borderRadius: '4px',
-                '& .MuiInputBase-root': {
-                  color: 'white',
-                },
-              }}
-            />
-          )}
 
-         
-          <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
-            Today
-          </Typography>
-          <List>
-            {messages.Today.filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase())).map(
-              (message, index) => (
-                <ListItem key={index} sx={{ padding: '8px 16px' }}>
-                  <ListItemText
-                    primary={message.chatLabel}
-                    primaryTypographyProps={{
-                      style: { fontFamily: 'Roboto', color: '#e0e0e0' },
-                    }}
-                  />
-                </ListItem>
-              )
-            )}
-          </List>
-
-          
-          <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
-            Yesterday
-          </Typography>
-          <List>
-            {messages.Yesterday.filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase())).map(
-              (message, index) => (
-                <ListItem key={index} sx={{ padding: '8px 16px' }}>
-                  <ListItemText
-                    primary={message.chatLabel}
-                    primaryTypographyProps={{
-                      style: { fontFamily: 'Roboto', color: '#e0e0e0' },
-                    }}
-                  />
-                </ListItem>
-              )
-            )}
-          </List>
-
-        
-          <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
-            Previous 7 days
-          </Typography>
-          <List>
-            {messages['Previous 7 days']
-              .filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase()))
-              .map((message, index) => (
-                <ListItem key={index} sx={{ padding: '8px 16px' }}>
-                  <ListItemText
-                    primary={message.chatLabel}
-                    primaryTypographyProps={{
-                      style: { fontFamily: 'Roboto', color: '#e0e0e0' },
-                    }}
-                  />
-                </ListItem>
-              ))}
-          </List>
         </div>
-      </Drawer>
-    </div>
+
+        <Typography variant="h6" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+          ChatGPT
+        </Typography>
+
+
+        {isSearchActive && (
+          <TextField
+            variant="outlined"
+            fullWidth
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search chats..."
+            sx={{
+              marginBottom: '16px',
+              backgroundColor: '#333333',
+              borderRadius: '4px',
+              '& .MuiInputBase-root': {
+                color: 'white',
+              },
+            }}
+          />
+        )}
+
+
+        <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+          Today
+        </Typography>
+        <List>
+          {messages.Today.filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase())).map(
+            (message, index) => (
+              <ListItem key={index} sx={{ padding: '8px 16px' }}>
+                <ListItemText
+                  primary={message.chatLabel}
+                  primaryTypographyProps={{
+                    style: { fontFamily: 'Roboto', color: '#e0e0e0' },
+                  }}
+                />
+              </ListItem>
+            )
+          )}
+        </List>
+
+
+        <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+          Yesterday
+        </Typography>
+        <List>
+          {messages.Yesterday.filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase())).map(
+            (message, index) => (
+              <ListItem key={index} sx={{ padding: '8px 16px' }}>
+                <ListItemText
+                  primary={message.chatLabel}
+                  primaryTypographyProps={{
+                    style: { fontFamily: 'Roboto', color: '#e0e0e0' },
+                  }}
+                />
+              </ListItem>
+            )
+          )}
+        </List>
+
+
+        <Typography variant="subtitle1" sx={{ padding: '8px 16px', color: 'white', fontWeight: 'bold' }}>
+          Previous 7 days
+        </Typography>
+        <List>
+          {messages['Previous 7 days']
+            .filter((message) => message.chatLabel.toLowerCase().includes(searchQuery.toLowerCase()))
+            .map((message, index) => (
+              <ListItem key={index} sx={{ padding: '8px 16px' }}>
+                <ListItemText
+                  primary={message.chatLabel}
+                  primaryTypographyProps={{
+                    style: { fontFamily: 'Roboto', color: '#e0e0e0' },
+                  }}
+                />
+              </ListItem>
+            ))}
+        </List>
+      </Drawer >
+    </div >
   );
 };
 
