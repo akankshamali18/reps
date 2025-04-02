@@ -14,7 +14,7 @@ const App: React.FC = () => {
         sx={{ 
           width: '100%', 
           height: '100vh', 
-          bgcolor: '#343541',
+          bgcolor: '#333333',
           overflow: 'hidden'
         }}
       >
