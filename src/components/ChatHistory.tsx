@@ -110,11 +110,8 @@ const ChatHistory = () => {
             placeholder="Search chats..."
             sx={{
               marginBottom: '16px',
-              backgroundColor: '#333333',
-              borderRadius: '4px',
-              '& .MuiInputBase-root': {
-                color: 'white',
-              },
+              backgroundColor: '#343541',
+
             }}
           />
         )}

@@ -6,19 +6,19 @@ import { UserMessageProps } from '../types/message.types';
 
 const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
   return (
-    <Box 
-      sx={{ 
+    <Box
+      sx={{
         width: '100%',
         py: 4,
         px: 4,
         display: 'flex',
         justifyContent: 'flex-end',
         bgcolor: 'rgba(52, 53, 65, 0.95)',
-        borderBottom: '1px solid rgba(32, 33, 35, 0.5)',
+        // borderBottom: '1px solid rgba(32, 33, 35, 0.5)',
       }}
     >
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           maxWidth: '80%',
           display: 'flex',
           flexDirection: 'row-reverse',
@@ -29,10 +29,10 @@ const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
         }}
       >
         {/* User Avatar */}
-        <Avatar 
+        <Avatar
           sx={{
-            width: 30, 
-            height: 30, 
+            width: 30,
+            height: 30,
             bgcolor: '#5a5a72',
             borderRadius: '4px',
             fontWeight: 'bold',
@@ -44,10 +44,10 @@ const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
           U
         </Avatar>
 
-        
-        <Box 
-          sx={{ 
-            flex: 1, 
+
+        <Box
+          sx={{
+            flex: 1,
             textAlign: 'left',
             backgroundColor: 'rgba(64, 65, 79, 0.2)',
             borderRadius: '0.75rem 0 0.75rem 0.75rem',
@@ -58,7 +58,7 @@ const UserMessage: React.FC<UserMessageProps> = ({ content, timestamp }) => {
           <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
             {content}
           </Typography>
-          
+
           {timestamp && (
             <Typography variant="caption" sx={{ display: 'block', mt: 1, color: 'text.secondary', textAlign: 'right' }}>
               {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

@@ -5,19 +5,19 @@ import { GPTMessageProps } from '../types/message.types';
 
 const GPTMessage: React.FC<GPTMessageProps> = ({ content, timestamp }) => {
   return (
-    <Box 
-      sx={{ 
+    <Box
+      sx={{
         width: '100%',
         py: 4,
         px: 4,
         display: 'flex',
         justifyContent: 'flex-start',
         bgcolor: 'rgba(68, 70, 84, 0.5)',
-        borderBottom: '1px solid rgba(32, 33, 35, 0.5)',
+        // borderBottom: '1px solid rgba(32, 33, 35, 0.5)',
       }}
     >
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           maxWidth: '80%',
           display: 'flex',
           flexDirection: 'row',
@@ -28,10 +28,10 @@ const GPTMessage: React.FC<GPTMessageProps> = ({ content, timestamp }) => {
         }}
       >
         {/* GPT Avatar */}
-        <Avatar 
+        <Avatar
           sx={{
-            width: 30, 
-            height: 30, 
+            width: 30,
+            height: 30,
             bgcolor: '#10a37f',
             borderRadius: '4px',
             flexShrink: 0,
@@ -48,12 +48,12 @@ const GPTMessage: React.FC<GPTMessageProps> = ({ content, timestamp }) => {
         </Avatar>
 
         {/* Message Content */}
-        <Box 
-          sx={{ 
-            flex: 1, 
+        <Box
+          sx={{
+            flex: 1,
             textAlign: 'left',
             backgroundColor: 'rgba(64, 65, 79, 0.2)',
-            borderRadius: '0 0.75rem 0.75rem 0.75rem',
+            // borderRadius: '0 0.75rem 0.75rem 0.75rem',
             p: 2,
             ml: 0,
           }}
@@ -61,7 +61,7 @@ const GPTMessage: React.FC<GPTMessageProps> = ({ content, timestamp }) => {
           <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
             {content}
           </Typography>
-          
+
           {timestamp && (
             <Typography variant="caption" sx={{ display: 'block', mt: 1, color: 'text.secondary' }}>
               {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}

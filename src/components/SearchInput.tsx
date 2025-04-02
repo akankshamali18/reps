@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ChatHistory from './ChatHistory';
 import { SearchProps } from '../types/search.types';
 import { 
   Paper, 
@@ -15,19 +14,22 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MicIcon from '@mui/icons-material/Mic';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 
-
+/**
+ * SearchInput Component
+ * A modern search input with ChatGPT-like design
+ */
 const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anything', className = '' }) => {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
-  
+  // Handle search submission
   const handleSearch = async (value: string) => {
     if (!value.trim()) return;
     
     setIsTyping(true);
     try {
       await onSearch(value);
-      setInputValue(''); 
+      setInputValue(''); // Clear input after search
     } finally {
       setIsTyping(false);
     }
@@ -53,7 +55,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
         right: 0,
         p: 2,
         pb: { xs: 2, sm: 4 },
-        bgcolor: '#212121',
+        bgcolor: '#343541',
         borderTop: '1px solid',
         borderColor: 'rgba(255,255,255,0.1)',
         zIndex: 1000,
@@ -74,7 +76,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
             display: 'flex',
             alignItems: 'center',
             borderRadius: '12px',
-            bgcolor: '#303030',
+            bgcolor: '#40414f',
             boxShadow: '0 0 15px rgba(0,0,0,0.1)',
             transition: 'box-shadow 0.2s ease',
             '&:hover': {
@@ -194,7 +196,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
               </IconButton>
             )}
 
-            
+            {/* Send button - only shown when input has text */}
             {inputValue && (
               <IconButton 
                 sx={{ 
@@ -217,7 +219,7 @@ const SearchInput: React.FC<SearchProps> = ({ onSearch, placeholder = 'Ask anyth
           </Box>
         </Paper>
 
-        
+        {/* Footer info text */}
         <Box sx={{ textAlign: 'center', mt: 1, fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>
           ChatGPT can make mistakes. Check important info.
         </Box>

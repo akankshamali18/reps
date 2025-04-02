@@ -16,26 +16,26 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
   }
 
   return (
-    <Box 
-      sx={{ 
-        pb: 16, 
+    <Box
+      sx={{
+        pb: 16,
         width: '100%',
-        px: 2, 
-        maxWidth: '1200px', 
-        mx: 'auto', 
+        px: 8,
+        maxWidth: '1200px',
+        mx: 'auto',
       }}
     >
       {messages.map((message) => (
         <React.Fragment key={message.id}>
           {message.role === 'user' ? (
-            <UserMessage 
-              content={message.content} 
-              timestamp={message.timestamp} 
+            <UserMessage
+              content={message.content}
+              timestamp={message.timestamp}
             />
           ) : (
-            <GPTMessage 
-              content={message.content} 
-              timestamp={message.timestamp} 
+            <GPTMessage
+              content={message.content}
+              timestamp={message.timestamp}
             />
           )}
         </React.Fragment>
